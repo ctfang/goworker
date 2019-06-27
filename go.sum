@@ -1,0 +1,12 @@
+github.com/ctfang/command v0.0.0-20190327092056-27958f50a31c h1:mCNCOn6DSwHxtoxla5QxAMZ7p/2UIniZHQM7mvaUeFI=
+github.com/ctfang/command v0.0.0-20190327092056-27958f50a31c/go.mod h1:iWJcUCwZReswQ7T5IaRE6ZvGzZ/m9v53Z1na20JttV8=
+github.com/ctfang/network v0.0.0-20190604113635-31985f3d312d h1:z9AL9UQknGJhOf2ccGTFa2LD2uAKGzQabClsairrTNA=
+github.com/ctfang/network v0.0.0-20190604113635-31985f3d312d/go.mod h1:T8Pco7U5qsYFXByUz1wkizHyPt3w6UxRToVKn6oShEE=
+github.com/ctfang/network v0.0.0-20190611093222-38944ae190b1 h1:O+932qUQXQgiIBZJFdBPXCV17k0jHcL+o2bP0IduwYA=
+github.com/ctfang/network v0.0.0-20190611093222-38944ae190b1/go.mod h1:T8Pco7U5qsYFXByUz1wkizHyPt3w6UxRToVKn6oShEE=
+github.com/ctfang/network v0.0.0-20190611114547-09c3330fa64f h1:3BQL1JKGYtE7LJeCMez+jAB9ZXlNc9C9CHXFRi7JgaY=
+github.com/ctfang/network v0.0.0-20190611114547-09c3330fa64f/go.mod h1:T8Pco7U5qsYFXByUz1wkizHyPt3w6UxRToVKn6oShEE=
+github.com/ctfang/network v0.0.0-20190619120328-6dbb209f2d1f h1:BebY2JiOW1tGbDUeYfWidjyDPmRfeCWwLenp1j5YyGs=
+github.com/ctfang/network v0.0.0-20190619120328-6dbb209f2d1f/go.mod h1:T8Pco7U5qsYFXByUz1wkizHyPt3w6UxRToVKn6oShEE=
+github.com/techleeone/gophp v0.1.0 h1:egZLeqwIBm9lnZ3ZkRLIf1nKHFFr/89aH9lvMCClE9o=
+github.com/techleeone/gophp v0.1.0/go.mod h1:vFf38I92ZchWPK9yrH/qPs/SL7M4beCwkxfWcvupEBU=
