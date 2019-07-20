@@ -115,7 +115,6 @@ type GatewayMessage struct {
 	Body    []byte
 }
 
-
 func ToGatewayMessage(data []byte) GatewayMessage {
 	Message := GatewayMessage{
 		PackageLen:   uint32(len(data)),
@@ -131,11 +130,9 @@ func ToGatewayMessage(data []byte) GatewayMessage {
 	}
 	Message.ExtData = string(data[24 : 24+Message.ExtLen])
 	Message.Body = data[(24 + Message.ExtLen):(Message.PackageLen)]
-
-	Message.PackageLen+=4
+	Message.PackageLen += 4
 	return Message
 }
-
 
 func GatewayMessageToByte(msg GatewayMessage) []byte {
 	var msgByte []byte

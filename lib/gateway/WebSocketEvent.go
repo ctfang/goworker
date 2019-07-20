@@ -4,6 +4,7 @@ import (
 	"github.com/ctfang/goworker/lib"
 	"github.com/ctfang/network"
 	"log"
+	"unicode/utf8"
 )
 
 /**
@@ -46,19 +47,26 @@ func (ws *WebSocketEvent) OnConnect(client network.Connect) {
 	// 添加连接池
 	Router.AddedClient(client)
 
-	ws.SendToWorker(client, lib.CMD_ON_CONNECT, []byte(""))
+	ws.SendToWorker(client, lib.CMD_ON_CONNECT, []byte(""), 1, "")
 }
 
+// 收到websocket信息
 func (ws *WebSocketEvent) OnMessage(c network.Connect, message []byte) {
-	ws.SendToWorker(c, lib.CMD_ON_MESSAGE, message)
+	extData := c.ExtData()
+	if extData == nil {
+		ws.SendToWorker(c, lib.CMD_ON_MESSAGE, message, 1, "")
+	} else {
+		ws.SendToWorker(c, lib.CMD_ON_MESSAGE, message, 1, string(extData.([]byte)))
+	}
 }
 
 func (ws *WebSocketEvent) OnClose(c network.Connect) {
-	ws.SendToWorker(c, lib.CMD_ON_CLOSE, []byte(""))
+	ws.SendToWorker(c, lib.CMD_ON_CLOSE, []byte(""), 1, "")
 	Router.DeleteClient(c.Id())
 }
 
-func (ws *WebSocketEvent) SendToWorker(client network.Connect, cmd uint8, body []byte) {
+// 发送信息的worker
+func (ws *WebSocketEvent) SendToWorker(client network.Connect, cmd uint8, body []byte, flag uint8, ExtData string) {
 	msg := lib.GatewayMessage{
 		PackageLen:   28 + uint32(len(body)),
 		Cmd:          cmd,
@@ -67,10 +75,10 @@ func (ws *WebSocketEvent) SendToWorker(client network.Connect, cmd uint8, body [
 		ClientIp:     client.GetIp(),
 		ClientPort:   client.GetPort(),
 		ConnectionId: client.Id(),
-		Flag:         1,
+		Flag:         flag,
 		GatewayPort:  lib.Config.Gateway.Port,
-		ExtLen:       0,
-		ExtData:      "",
+		ExtLen:       uint32(utf8.RuneCountInString(ExtData)),
+		ExtData:      ExtData,
 		Body:         body,
 	}
 
@@ -82,6 +90,7 @@ func (ws *WebSocketEvent) SendToWorker(client network.Connect, cmd uint8, body [
 		Router.DeleteClient(client.Id())
 		return
 	}
+	log.Println("发信息给worker", string(msg.Body))
 	worker.SendByte(lib.GatewayMessageToByte(msg))
 }
 
